@@ -1,0 +1,33 @@
+model:
+  arch: mini_gpt4
+  model_type: pretrain_vicuna
+  freeze_vit: True
+  freeze_qformer: True
+  max_txt_len: 160
+  end_sym: "###"
+  # low_resource: True
+  prompt_path: "prompts/alignment.txt"
+  prompt_template: '###Human: {} ###Assistant: '
+  # ckpt: '/ibex/user/mohameys/minigpt4/output/minigpt4_stage2_finetune/laionx/sbu/20230623163/checkpoint_4.pth'
+  ckpt: '/ibex/user/mohameys/minigpt4/output/minigpt4_stage2_finetune/laionx/artelingo/20230623153/checkpoint_4.pth'
+  # ckpt: '/ibex/user/mohameys/minigpt4/output/minigpt4_stage2_finetune/laionx/artelingo_pair/20230623153/checkpoint_4.pth'
+  # ckpt: '/ibex/user/mohameys/minigpt4/output/minigpt4_stage2_finetune/laionx/artelingo_multi_pair/20240130222/checkpoint_4.pth'
+  # ckpt: '/ibex/user/mohameys/minigpt4/output/minigpt4_stage2_finetune/laionx/artelingo_multi_nopair/20240130231/checkpoint_4.pth'
+  # ckpt: '/ibex/user/mohameys/minigpt4/output/minigpt4_stage2_finetune/laionx/artelingo_multi_nopair/20240130231/checkpoint_0.pth'
+  # ckpt: '/home/mohameys/minigpt4/minigpt4/output/minigpt4_stage1_pretrain/laion-x-prompt/checkpoint_3.pth'
+
+
+datasets:
+  artelingo:
+    vis_processor:
+      train:
+        name: "blip2_image_eval"
+        image_size: 224
+    text_processor:
+      train:
+        name: "blip_caption"
+
+run:
+  task: image_text_pretrain
+
+# python -u /home/mohameys/minigpt4/new_metrics.py --references '/ibex/user/mohameys/artelingo/multilingual_test_metadata.csv' --generations '/home/mohameys/minigpt4/artelingo_multi_pair_4.csv' |& tee artelingo_multi_pair_4_br.txt

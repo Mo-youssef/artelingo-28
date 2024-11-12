@@ -1,0 +1,5 @@
+datasets:
+  artelingo_pair:
+    data_type: images
+    build_info:
+      storage: "/ibex/user/mohameys/artelingo/"

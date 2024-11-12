@@ -1,0 +1,25 @@
+model:
+  arch: mini_gpt4
+  model_type: pretrain_vicuna
+  freeze_vit: True
+  freeze_qformer: True
+  max_txt_len: 160
+  end_sym: "###"
+  # low_resource: True
+  prompt_path: "prompts/alignment.txt"
+  prompt_template: '###Human: {} ###Assistant: '
+  ckpt: '/ibex/user/mohameys/minigpt4/output/minigpt4_stage2_finetune/laionx/seenunseen/artelingo_multi_pair_lang#/checkpoint_best.pth'
+
+
+datasets:
+  artelingo:
+    vis_processor:
+      train:
+        name: "blip2_image_eval"
+        image_size: 224
+    text_processor:
+      train:
+        name: "blip_caption"
+
+run:
+  task: image_text_pretrain
